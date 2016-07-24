@@ -13,9 +13,6 @@
 #include "TimedEventsManagement.h"
 #include "LED.h"
 
-#include "LCD.h" //TODO: delete me
-#include <avr/delay.h> //TODO delete me
-
 SystemKonfiguration_Array System::values = SystemKonfiguration_Array_ZEROS; // initialization useless, but mandatory
 
 SystemKonfiguration_Array EEMEM System::initialValues = SystemKonfiguration_Array_EEPROM_INITIAL_VALUES;
