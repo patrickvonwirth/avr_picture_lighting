@@ -10,24 +10,24 @@
 #include "LCD.h"
 
 ksc_FSMState GUI::fsmState = sConfigChoose;
-SystemKonfiguration GUI::config = sk_brightness;
+SystemConfiguration GUI::config = sk_brightness;
 uint8_t GUI::cachedInitValue = 0; // will be initialized later
 
 
 void GUI::sConfigChoose(const ksc_control aControl) {
   switch (aControl) {
   case ksc_cUP:
-    if (config == SystemKonfiguration(sk_STATE_COUNT-1)) {
-      config = SystemKonfiguration(0);
+    if (config == SystemConfiguration(sk_STATE_COUNT-1)) {
+      config = SystemConfiguration(0);
     } else {
-      config = SystemKonfiguration(config + 1);
+      config = SystemConfiguration(config + 1);
     }
     break;
   case ksc_cDown:
-    if (config == SystemKonfiguration(0)) {
-      config = SystemKonfiguration(sk_STATE_COUNT-1);
+    if (config == SystemConfiguration(0)) {
+      config = SystemConfiguration(sk_STATE_COUNT-1);
     } else {
-      config = SystemKonfiguration(config - 1);
+      config = SystemConfiguration(config - 1);
     }
     break;
   case ksc_cOK:

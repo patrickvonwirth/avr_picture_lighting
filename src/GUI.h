@@ -10,7 +10,7 @@
 
 #include <avr/io.h>
 
-#include "konfigurations.h"
+#include "configurations.h"
 
 enum ksc_control {
   ksc_cUP      = 0,
@@ -27,7 +27,7 @@ class GUI {
 private:
   // FSM
   static ksc_FSMState fsmState;
-  static SystemKonfiguration config;
+  static SystemConfiguration config;
   static uint8_t cachedInitValue;
   static void sConfigChoose(const ksc_control aControl);
   static void sConfigChange(const ksc_control aControl);

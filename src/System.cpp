@@ -13,21 +13,21 @@
 #include "TimedEventsManagement.h"
 #include "LED.h"
 
-SystemKonfiguration_Array System::values = SystemKonfiguration_Array_ZEROS; // initialization useless, but mandatory
+SystemConfiguration_Array System::values = SystemConfiguration_Array_ZEROS; // initialization useless, but mandatory
 
-SystemKonfiguration_Array EEMEM System::initialValues = SystemKonfiguration_Array_EEPROM_INITIAL_VALUES;
+SystemConfiguration_Array EEMEM System::initialValues = SystemConfiguration_Array_EEPROM_INITIAL_VALUES;
 
 uint8_t System::nextFlicker = 0;
 uint8_t System::rand_shift = 0;
 uint8_t System::rand_minimalBitMask = 0xFF;
 uint8_t System::rand_missedRange = 0;
 
-uint8_t System::validate(const SystemKonfiguration aSystemKonfiguration, const uint8_t aValue) {
-  if (aValue <= SystemKonfiguration_MinValues[aSystemKonfiguration]) {
-    return SystemKonfiguration_MinValues[aSystemKonfiguration];
+uint8_t System::validate(const SystemConfiguration aSystemKonfiguration, const uint8_t aValue) {
+  if (aValue <= SystemConfiguration_MinValues[aSystemKonfiguration]) {
+    return SystemConfiguration_MinValues[aSystemKonfiguration];
   }
-  if (aValue >= SystemKonfiguration_MaxValues[aSystemKonfiguration]) {
-    return SystemKonfiguration_MaxValues[aSystemKonfiguration];
+  if (aValue >= SystemConfiguration_MaxValues[aSystemKonfiguration]) {
+    return SystemConfiguration_MaxValues[aSystemKonfiguration];
   }
   return aValue;
 }
@@ -110,11 +110,11 @@ void System::flicker() {
   }
 }
 
-uint8_t System::getKonfiguration(const SystemKonfiguration aSystemKonfiguration) {
+uint8_t System::getKonfiguration(const SystemConfiguration aSystemKonfiguration) {
   return values[aSystemKonfiguration];
 }
 
-void System::setKonfiguration(const SystemKonfiguration aSystemKonfiguration, const uint8_t aNewValue) {
+void System::setKonfiguration(const SystemConfiguration aSystemKonfiguration, const uint8_t aNewValue) {
   values[aSystemKonfiguration] = validate(aSystemKonfiguration, aNewValue);
   if (aSystemKonfiguration == sk_variance) {
     initializeRand();
@@ -122,10 +122,10 @@ void System::setKonfiguration(const SystemKonfiguration aSystemKonfiguration, co
   updateLEDOutput();
 }
 
-uint8_t System::getInitValue(const SystemKonfiguration aSystemKonfiguration) {
+uint8_t System::getInitValue(const SystemConfiguration aSystemKonfiguration) {
   return eeprom_read_byte(&initialValues[aSystemKonfiguration]);
 }
 
-void System::setInitValue(const SystemKonfiguration aSystemKonfiguration, const uint8_t aNewValue) {
+void System::setInitValue(const SystemConfiguration aSystemKonfiguration, const uint8_t aNewValue) {
   eeprom_update_byte(&initialValues[aSystemKonfiguration], validate(aSystemKonfiguration, aNewValue));
 }
