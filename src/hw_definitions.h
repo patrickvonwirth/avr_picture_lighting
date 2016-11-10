@@ -27,6 +27,10 @@
   #define PortD_RGState_ShiftRight 2
   #define ConvertActiveLowToBitOnMask 0b00000011
 
+// DEFINE TWI PROPERTIES
+  #define TWI_ADDRESS 0b00001010 // define 7bit TWI address = 10
+  #define TWI_GENERALCALL_ENABLE true // activate general call reaction
+  #define TWI_BUFFER_SIZE 2 // TWI data buffer(transmit/receive) size = 2 byte
 
 // DEFINE CONTROLLER SFR (= Special Function Register) and related constants
 

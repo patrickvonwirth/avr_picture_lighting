@@ -15,6 +15,7 @@
 #include "UntimedEventsManagement.h"
 #include "System.h"
 #include "GUI.h"
+#include "TWIUI.h"
 
 // Button0 Interrupt
 ISR(INT0_vect) {
@@ -31,16 +32,24 @@ ISR(TIMER0_OVF_vect) {
   TimedEventsManagement::nextStep();
 }
 
+ISR(TWI_vect) {
+  TWI_UI::onInterrupt();
+}
+
 int main() {
   // initialize hardware
   initialize_controller();
   avrp::sranduint8_eeprom();
 
-  // load initial system konfiguration from eeprom
+  // load initial system configuration from EEPROM
   System::initialize();
 
-  // initialize GUI
+  // initialize UIs
+  TWI_UI::initialize();
   GUI::ReloadLCD();
+
+  // activate global interrupt system
+  sei();
 
   // run program
   while (true) {
@@ -52,5 +61,6 @@ int main() {
     }
   }
 
+  // never reached
   return 0;
 }

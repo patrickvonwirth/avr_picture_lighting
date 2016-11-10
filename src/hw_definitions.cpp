@@ -10,6 +10,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+//#include "avr_lib/avrp/TWISlave.h"
+
 void initialize_controller(){
 
 // Sleep and external interrupts
@@ -39,6 +41,5 @@ void initialize_controller(){
 // Timer Interrupts
   TIMSK = TIMSK_HWDEF;
 
-// Enable global interrupt system
-  sei();
+// Enable global interrupt system later in the main program right before start
 }
